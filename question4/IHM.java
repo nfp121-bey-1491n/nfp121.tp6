@@ -48,8 +48,30 @@ public class IHM extends JFrame {
             resultat.setText(Main.arbreXML(g)); //actualiser();
         }catch(Exception e){}
 
-        debiter.addActionListener(null/* a completer */);
-        crediter.addActionListener(null/* a completer */);
+        debiter.addActionListener( new ActionListener(){ 
+                public void actionPerformed(ActionEvent ae){                             
+                
+                AbstractTransaction transaction = new TransactionDebit(g); 
+                try{                             
+                  transaction.debit(Integer.parseInt(somme.getText())); 
+                 }catch(Exception e){} 
+                 
+                try{                             
+                  resultat.setText(Main.arbreXML(g)); 
+                }catch(Exception e){} 
+                } 
+            });
+        
+        crediter.addActionListener( new ActionListener(){
+              public void actionPerformed(ActionEvent ae){                             
+              
+                AbstractTransaction transaction = new TransactionDebit(g);                            
+                transaction.credit(Integer.parseInt(somme.getText())); 
+              
+                try{                             
+                  resultat.setText(Main.arbreXML(g)); 
+                }catch(Exception e){} } 
+            });
 
             
         this.pack();
